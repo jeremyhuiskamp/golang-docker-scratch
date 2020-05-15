@@ -1,0 +1,18 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  schedule:
+    # because we're dependent on some docker images that can change
+    - cron: '0 0 1 * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: |
+        docker build -t golang-scratch-test .
+        docker run --rm golang-scratch-test

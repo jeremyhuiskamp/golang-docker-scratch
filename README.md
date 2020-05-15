@@ -1,5 +1,7 @@
 # golang-docker-scratch
 
+[![Build](https://github.com/jeremyhuiskamp/golang-docker-scratch/workflows/build/badge.svg)](https://github.com/jeremyhuiskamp/golang-docker-scratch/actions?query=workflow%3Abuild)
+
 A recipe for go binaries in a scratch docker container with
 up-to-date tls certs and timezone data.
 
