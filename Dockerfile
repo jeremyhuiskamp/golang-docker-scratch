@@ -13,10 +13,10 @@ RUN zip -q -r -0 /zoneinfo.zip .
 
 FROM scratch
 # the test program:
-COPY --from=golang /go/bin/app /app
+COPY --from=golang /go/bin/golang-docker-scratch /golang-docker-scratch
 # the timezone data:
 ENV ZONEINFO /zoneinfo.zip
 COPY --from=alpine /zoneinfo.zip /
 # the tls certificates:
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-ENTRYPOINT ["/app"]
+ENTRYPOINT ["/golang-docker-scratch"]
