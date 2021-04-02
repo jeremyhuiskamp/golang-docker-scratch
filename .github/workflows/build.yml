@@ -14,9 +14,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image with tzdata embedded in go binary
       run: |
-        docker build -t golang-scratch-test .
+        docker build -t golang-scratch-test --pull .
         docker run --rm golang-scratch-test
     - name: Build the Docker image with tzdata from alpine
       run: |
-        docker build -t golang-scratch-test-externaltz -f Dockerfile.externaltz .
+        docker build -t golang-scratch-test-externaltz --pull -f Dockerfile.externaltz .
         docker run --rm golang-scratch-test-externaltz

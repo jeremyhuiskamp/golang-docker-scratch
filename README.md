@@ -20,7 +20,7 @@ without needing the rest of alpine in the final image.
 ## Instructions
 
 ```
-docker build -t golang-scratch-test . && docker run -it --rm golang-scratch-test
+docker build -t golang-scratch-test --pull . && docker run -it --rm golang-scratch-test
 ```
 
 ## External tzdata

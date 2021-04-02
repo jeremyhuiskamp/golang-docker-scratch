@@ -1,4 +1,4 @@
-FROM golang:alpine as golang
+FROM golang:alpine as app-builder
 WORKDIR /go/src/app
 COPY . .
 # Static build required so that we can safely copy the binary over.
@@ -7,7 +7,8 @@ RUN CGO_ENABLED=0 go install -ldflags '-extldflags "-static"' -tags timetzdata
 
 FROM scratch
 # the test program:
-COPY --from=golang /go/bin/golang-docker-scratch /golang-docker-scratch
+COPY --from=app-builder /go/bin/golang-docker-scratch /golang-docker-scratch
 # the tls certificates:
-COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+# NB: this pulls directly from the upstream image, which already has ca-certificates:
+COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 ENTRYPOINT ["/golang-docker-scratch"]
