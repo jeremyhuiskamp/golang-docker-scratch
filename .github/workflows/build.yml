@@ -12,7 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
+    - name: Build the Docker image with tzdata embedded in go binary
       run: |
         docker build -t golang-scratch-test .
         docker run --rm golang-scratch-test
+    - name: Build the Docker image with tzdata from alpine
+      run: |
+        docker build -t golang-scratch-test-externaltz -f Dockerfile.externaltz .
+        docker run --rm golang-scratch-test-externaltz
